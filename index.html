@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>vvSVM 1 – Intranet</title>
+  <meta name="theme-color" content="#ffd400">
+  <style>
+    :root{
+      --yellow: #ffd400;       /* hoofdgeel */
+      --yellow-2: #ffea80;     /* lichtgeel accenten */
+      --ink: #1e1e1e;          /* tekst */
+      --muted: #5a5a5a;
+      --bg: #0c0c0c;           /* donkere achtergrond */
+      --card: rgba(255, 212, 0, 0.08);
+      --ring: rgba(255, 212, 0, 0.45);
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 20% -20%, #1a1a1a 0%, var(--bg) 60%) no-repeat fixed;
+      color: var(--ink);
+    }
+    .container{max-width:1100px;margin:0 auto;padding:clamp(16px,3vw,32px)}
+    .banner{
+      position:relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(800px 300px at 80% -40%, rgba(255,212,0,.20) 0%, rgba(255,212,0,0) 60%),
+        linear-gradient(135deg, #fff5b0, var(--yellow-2));
+      color:#1a1a00;
+      padding: clamp(24px,5vw,48px);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .title{font-size: clamp(26px,4vw,40px); margin:0 0 8px; font-weight: 800; letter-spacing:.2px}
+    .subtitle{margin:0; opacity:.8; font-size: clamp(14px,1.8vw,16px)}
+    .tagbar{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap}
+    .tag{
+      background:#fff8cc;
+      border:1px solid rgba(0,0,0,.06);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px; font-weight:600;
+    }
+
+    /* Tiles */
+    .grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:16px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr; } }
+
+    .tile{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .tile:focus-within, .tile:hover{
+      transform: translateY(-2px);
+      border-color: var(--ring);
+      box-shadow: 0 12px 36px rgba(255, 212, 0, 0.20);
+    }
+    .tile h3{margin:8px 0 6px; font-size:18px}
+    .tile p{margin:0; color:#cfcfcf; font-size:14px; line-height:1.4}
+    .tile .icon{
+      width:46px; height:46px; border-radius:12px;
+      display:grid; place-items:center;
+      background: linear-gradient(145deg, rgba(255,212,0,.35), rgba(255,212,0,.15));
+      border:1px solid var(--ring);
+      margin-bottom:10px;
+      font-size:22px;
+    }
+    .tile a.button{
+      display:inline-block; margin-top:10px;
+      background: var(--yellow);
+      color:#1a1a00; text-decoration:none; font-weight:800; font-size:14px;
+      padding:10px 14px; border-radius:10px; border:1px solid rgba(0,0,0,.08);
+      transition: filter .15s ease, transform .1s ease;
+    }
+    .tile a.button:active{ transform: translateY(1px); }
+    .tile a.button:hover{ filter: brightness(1.03); }
+
+    /* Sections */
+    section{margin-top:28px}
+    .section-card{
+      background: rgba(255,212,0,.06);
+      border:1px solid rgba(255,212,0,.18);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .section-card h2{
+      margin:0 0 10px;
+      font-size:20px;
+      display:flex; align-items:center; gap:10px;
+      color:#f7f7c2;
+    }
+    .section-card ul{margin:8px 0 0 20px; color:#d9d9d9}
+    .muted{color:#b5b5b5}
+
+    /* Footer */
+    footer{opacity:.7; font-size:12px; text-align:center; margin:26px 0}
+    /* Accessible link focus */
+    a:focus-visible{ outline:2px solid var(--yellow); outline-offset:3px }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Banner -->
+    <header class="banner" role="banner" aria-label="Hoofdbanner vvSVM 1">
+      <h1 class="title">vvSVM 1 – Seizoen 2024/25</h1>
+      <p class="subtitle">Alle info voor spelers: boetepot, aanwezigheid, schema’s en corvee</p>
+      <div class="tagbar" aria-hidden="true">
+        <span class="tag">#boetepot</span>
+        <span class="tag">#aanwezigheid</span>
+        <span class="tag">#schema</span>
+        <span class="tag">#corvee</span>
+      </div>
+    </header>
+
+    <!-- Tiles -->
+    <main>
+      <div class="grid" aria-label="Snelkoppelingen">
+        <!-- Boetepot -->
+        <article class="tile">
+          <div class="icon" aria-hidden="true">📊</div>
+          <h3>Boetepot</h3>
+          <p>Bekijk openstaande boetes en betaalopties. Actueel en transparant.</p>
+          <a class="button" href="https://example.com/boetepot" target="_blank" rel="noopener">Open boetepot</a>
+        </article>
+
+        <!-- Aanwezigheid -->
+        <article class="tile">
+          <div class="icon" aria-hidden="true">📅</div>
+          <h3>Aanwezigheid</h3>
+          <p>Geef door of je bij trainingen en wedstrijden bent.</p>
+          <a class="button" href="https://example.com/aanwezigheid" target="_blank" rel="noopener">Open aanwezigheid</a>
+        </article>
+
+        <!-- Schema’s -->
+        <article class="tile">
+          <div class="icon" aria-hidden="true">⚽</div>
+          <h3>Schema’s</h3>
+          <p>Trainings- en wedstrijdschema (incl. voorbereiding).</p>
+          <a class="button" href="https://example.com/schemas" target="_blank" rel="noopener">Open schema’s</a>
+        </article>
+
+        <!-- Corvee -->
+        <article class="tile">
+          <div class="icon" aria-hidden="true">🧹</div>
+          <h3>Corvee</h3>
+          <p>Bekijk wie deze week verantwoordelijk is voor corvee.</p>
+          <a class="button" href="https://example.com/corvee" target="_blank" rel="noopener">Open corvee</a>
+        </article>
+      </div>
+
+      <!-- Announcements -->
+      <section aria-labelledby="news-title">
+        <div class="section-card">
+          <h2 id="news-title">📢 Belangrijk nieuws</h2>
+          <ul>
+            <li>Oefenwedstrijd zondag 14:00 — verzamelen 12:45.</li>
+            <li>Vanaf volgende week nieuw trainingsschema.</li>
+            <li class="muted">Werk deze lijst wekelijks bij.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Extra's -->
+      <section aria-labelledby="extras-title">
+        <div class="section-card">
+          <h2 id="extras-title">🧩 Extra’s</h2>
+          <ul>
+            <li>Teamagenda (Google Agenda) embedden kan hier.</li>
+            <li>Contact: trainer/leider met telefoonnummer en e-mail.</li>
+            <li>Documenten: teamregels of KNVB-regels als PDF-link.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>© vvSVM 1 — intranet</footer>
+  </div>
+</body>
+</html>
